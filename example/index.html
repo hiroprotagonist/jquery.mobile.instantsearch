@@ -1,0 +1,32 @@
+<!DOCTYPE html> 
+<html> 
+	<head> 
+	<title>I.S. Test Site</title> 
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.css" />
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/mobile/1.0a4.1/jquery.mobile-1.0a4.1.min.js"></script>
+	<!-- instant search widget goes here -->
+	<link rel="stylesheet" href="../jquery.mobile.instantsearch.css" />
+	<script type="text/javascript" src="../jquery.mobile.instantsearch.js"></script>
+</head>
+<body> 
+	<!-- Main Search Page -->
+	<div data-role="page">
+		<div data-role="header">
+			<h1>I.S. Test-Site</h1>
+		</div><!-- /header -->
+		<div data-role="content">
+
+			This site is not working with file:/// due to same origin policy. jsonp is in progress.
+
+			<form data-role="instantsearch" method="get" action="search.html">
+				<!--  visible part -->
+				<input name="q" type="search" autocomplete="off"/>
+				<!-- additional hidden data -->
+				<input type="hidden" name="somevalue" value="123"/>
+				<input type="hidden" name="anothervalue" value="456"/>
+			</form>
+		</div><!-- /content -->
+	</div><!-- /page -->
+</body>
+</html>

@@ -1,0 +1,5 @@
+form[data-role='instantsearch'] input[data-type='search'].loading {
+	background-image: url("images/inprogress.gif");
+	background-position: 100% 50%;
+	background-repeat: no-repeat;	
+}
