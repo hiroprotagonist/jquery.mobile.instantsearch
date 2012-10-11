@@ -52,7 +52,7 @@
 		}
 	});
 
-	$(":jqmData(role='page')").live("pagecreate", function() {
+	$(":jqmData(role='page')").live("pageinit", function() {
 		$(":jqmData(role='instantsearch')", this).each(function() {
 			$(this).instantsearch();
 		});
