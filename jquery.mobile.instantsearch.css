@@ -1,5 +1,8 @@
-form[data-role='instantsearch'] input[data-type='search'].loading {
+input[data-role='inputassistant'].loading {
 	background-image: url("images/inprogress.gif");
 	background-position: 100% 50%;
 	background-repeat: no-repeat;	
+}
+li.inputassistant-container div.ui-input-search {
+	width: 100%;
 }
