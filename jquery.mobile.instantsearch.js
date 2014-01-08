@@ -1,11 +1,3 @@
-/*
- * jquery.mobile.actionsheet v2
- *
- * Copyright (c) 2011, Stefan Gebhardt
- * Dual licensed under the MIT and GPL Version 2 licenses.
- * 
- * Date: 2011-05-03 17:11:00 (Tue, 3 May 2011)
- */
 (function ($, window, undefined) {
 	$.widget("mobile.instantsearch", $.mobile.widget, {
 		inputField: undefined, //Search inupt
@@ -27,7 +19,11 @@
 				return false;
 			});
 			this.element.bind('search', $.proxy(this.delaysearch, this));
-
+			this.element.bind('clearResult', $.proxy(this.clearResult, this));
+			
+			// Clear resultbox when the clear button of a search input is clicked
+			$('.ui-input-clear', this.element).bind('click', $.proxy(this.clearResult, this));
+			
 			this.inputField = this.element.find(':jqmData(type="search")');
 			this.inputField.bind('keyup', $.proxy(this.delaysearch, this));
 		},
@@ -37,11 +33,14 @@
 			}
 			this.timeout = window.setTimeout($.proxy(this.submit, this), this.options.delay);
 		},
+		clearResult: function () {
+			this.resultDisplay.empty();
+		},
 		submit: function () {
 			$.ajax({
 				url: this.element.attr('action'),
 				context: this,
-				dataType: 'html',
+				dataType: 'text',
 				type: this.element.attr('method'),
 				data: this.element.serialize(),
 				beforeSend: function () {
@@ -50,8 +49,12 @@
 				complete: function () {
 					this.inputField.removeClass('loading');
 				},
+				error: function (xhr) {
+					var message = "Sorry, your request could not be fullfilled.\nStatus Text:" + xhr.statusText + "\nStatus Code: " + xhr.status;
+					alert( message );
+				},
 				success: function (html) {
-					var content = $(html);
+					var content = $( html.trim() );
 					this.resultDisplay.html(content);
 					// Enhance the content if necessary
 					if ( typeof(content.attr('data-role')) !== 'undefined' ) {
@@ -72,7 +75,7 @@
 		}
 	});
 
-	$(":jqmData(role='page')").live("pageinit", function () {
+	$.mobile.document.bind( "pagecreate", function( e ) {
 		$(":jqmData(role='instantsearch')", this).each(function () {
 			$(this).instantsearch();
 		});
