@@ -8,6 +8,13 @@
 			instantsearchResultboxid: null
 		},
 		_init: function () {
+			
+			// Avoid multiple initialisation
+			if(typeof this.element.data('instantsearch_initialized') !== "undefined") {
+				return;
+			}
+			this.element.data('instantsearch_initialized', true);
+			
 			if (this.options.instantsearchResultboxid !== null) {
 				this.resultDisplay = $('#' + this.options.instantsearchResultboxid);
 			} else {
